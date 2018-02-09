@@ -1,4 +1,4 @@
-## R code to create plot1.png
+## R code to create plot4.png
 
 library(dplyr)
 library(lubridate)
