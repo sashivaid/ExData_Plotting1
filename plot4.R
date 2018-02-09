@@ -8,14 +8,21 @@ library(lubridate)
 powerData <- read.table("./household_power_consumption.txt", sep=";", na.strings="?", header=TRUE)
 powerData$Date <- as.Date(powerData$Date, "%d/%m/%Y")
 
+## subset data for reqd dates
 
 reqdPowerData <- dplyr::filter(powerData, 
                               Date == as.Date("2007-02-01", "%Y-%m-%d") | 
 							  Date == as.Date("2007-02-02", "%Y-%m-%d"))
+							  
+## form datetime
 
 reqdPowerData$dateTime <- ymd_hms(paste(reqdPowerData$Date, reqdPowerData$Time))
 
+## open device and plot graphs
+
 png(filename="plot4.png")
+
+## set the canvas to print 4 graphs
 
 par(mfrow = c(2,2))
 
@@ -38,7 +45,11 @@ plot(dateTime, Global_reactive_power, type = "l")
 }
 )
 
+## remove variables
+
 dev.off()
+
+## remove variables
 
 rm(powerData)
 rm(reqdPowerData)
